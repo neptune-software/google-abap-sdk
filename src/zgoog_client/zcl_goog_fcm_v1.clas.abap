@@ -42,7 +42,6 @@ public section.
                  light_settings   type string,
                  image            type string,
                end of ty_android_notification .
-
   types:
     begin of ty_fcm_options,
                  analytics_label type string,
@@ -142,8 +141,8 @@ public section.
                end of ty_messages_send_each_for_mc .
 
   constants C_SERVICE_NAME type /GOOG/SERVICE_NAME value 'fcm:v1'. "#EC NOTEXT
-  constants C_REVISION_DATE type DATUM value 20240321. "#EC NEEDED
-  constants C_SUPPORTED_AUTH type /GOOG/SUPP_AUTH value 'IJIJ'. "#EC NEEDED
+  constants C_REVISION_DATE type DATUM value 20240321. "#EC NOTEXT    "#EC NEEDED
+  constants C_SUPPORTED_AUTH type /GOOG/SUPP_AUTH value 'IJIJ'. "#EC NOTEXT    "#EC NEEDED
   constants C_ROOT_URL type STRING value 'https://fcm.googleapis.com'. "#EC NOTEXT
   constants C_PATH_PREFIX type STRING value ''. "#EC NOTEXT
 
@@ -152,7 +151,9 @@ public section.
     importing
       !IV_KEY_NAME type /GOOG/KEYNAME optional
       !IV_LOG_OBJ type BALOBJ_D optional
-      !IV_LOG_SUBOBJ type BALSUBOBJ optional .
+      !IV_LOG_SUBOBJ type BALSUBOBJ optional
+    raising
+      /GOOG/CX_SDK .
   methods MESSAGES_SEND
     importing
       !IS_INPUT type TY_MESSAGES_SEND optional
@@ -162,19 +163,25 @@ public section.
       !ES_RAW type DATA
       !EV_RET_CODE type I
       !EV_ERR_TEXT type STRING
-      !ES_ERR_RESP type /GOOG/ERR_RESP .
+      !ES_ERR_RESP type /GOOG/ERR_RESP
+    raising
+      /GOOG/CX_SDK .
   methods MESSAGES_SEND_EACH
     importing
       !IS_INPUT type TY_MESSAGES_SEND_EACH
       !IV_FCM_PROJECTS_ID type STRING
     exporting
-      !ET_OUTPUT type TY_T_SEND_EACH_RES .
+      !ET_OUTPUT type TY_T_SEND_EACH_RES
+    raising
+      /GOOG/CX_SDK .
   methods MESSAGES_SEND_EACH_FOR_MC
     importing
       !IS_INPUT type TY_MESSAGES_SEND_EACH_FOR_MC
       !IV_FCM_PROJECTS_ID type STRING
     exporting
-      !ET_OUTPUT type TY_T_SEND_EACH_RES .
+      !ET_OUTPUT type TY_T_SEND_EACH_RES
+    raising
+      /GOOG/CX_SDK .
 protected section.
 private section.
 ENDCLASS.
@@ -213,9 +220,6 @@ method CONSTRUCTOR.
                       iv_service_name    = c_service_name
                       iv_log_obj         = iv_log_obj
                       iv_log_subobj      = iv_log_subobj ).
-
-*  add_json_name_mapping( exporting iv_abap = 'TOPIC_MESSAGE_RETENTION_DURATI'
-*                                   iv_json = 'topicMessageRetentionDuration' ).
 
   if ls_key is initial.
 
@@ -257,7 +261,7 @@ method messages_send.
     lv_uri = lv_uri && '?'.
     loop at gt_common_qparams into ls_common_qparam.
       if ls_common_qparam-name is not initial and
-        ls_common_qparam-value is not initial.
+         ls_common_qparam-value is not initial.
         lv_uri = lv_uri && ls_common_qparam-name && '=' && ls_common_qparam-value.
         lv_uri = lv_uri && '&'.
       endif.
@@ -282,8 +286,7 @@ method messages_send.
     lv_json_final = /goog/cl_json_util=>serialize_json(
       is_data          = is_input
       iv_method_id     = lv_mid
-      it_name_mappings = gt_name_mappings
-    ).
+      it_name_mappings = gt_name_mappings ).
   endif.
 
 * Call HTTP method
@@ -305,7 +308,7 @@ method messages_send.
                                                   it_name_mappings = gt_name_mappings
                                         importing es_data          = ls_output ).
 
-  es_output = ls_output .
+  es_output = ls_output.
 endmethod.
 
 
@@ -319,14 +322,13 @@ method messages_send_each.
   ls_messages_send-validate_only = is_input-validate_only.
 
   loop at is_input-messages into ls_messages_send-message.
-    messages_send(
-      exporting is_input           = ls_messages_send
-                iv_fcm_projects_id = iv_fcm_projects_id
-      importing es_output          = ls_output-output
-                es_raw             = ls_output-raw
-                ev_ret_code        = ls_output-ret_code
-                ev_err_text        = ls_output-err_text
-                es_err_resp        = ls_output-err_resp ).
+    messages_send( exporting is_input           = ls_messages_send
+                             iv_fcm_projects_id = iv_fcm_projects_id
+                   importing es_output          = ls_output-output
+                             es_raw             = ls_output-raw
+                             ev_ret_code        = ls_output-ret_code
+                             ev_err_text        = ls_output-err_text
+                             es_err_resp        = ls_output-err_resp ).
 
     insert ls_output into table et_output.
 
@@ -346,14 +348,13 @@ method messages_send_each_for_mc.
   move-corresponding is_input-message to ls_messages_send-message.
 
   loop at is_input-message-tokens into ls_messages_send-message-token.
-     messages_send(
-      exporting is_input           = ls_messages_send
-                iv_fcm_projects_id = iv_fcm_projects_id
-      importing es_output          = ls_output-output
-                es_raw             = ls_output-raw
-                ev_ret_code        = ls_output-ret_code
-                ev_err_text        = ls_output-err_text
-                es_err_resp        = ls_output-err_resp ).
+     messages_send(  exporting is_input           = ls_messages_send
+                               iv_fcm_projects_id = iv_fcm_projects_id
+                     importing es_output          = ls_output-output
+                               es_raw             = ls_output-raw
+                               ev_ret_code        = ls_output-ret_code
+                               ev_err_text        = ls_output-err_text
+                               es_err_resp        = ls_output-err_resp ).
 
     insert ls_output into table et_output.
 
