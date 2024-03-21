@@ -11,8 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/neptune-software/google-abap-sdk.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "", 
   "bugs": {
     "url": "https://github.com/neptune-software/google-abap-sdk/issues"
   },
