@@ -16,7 +16,7 @@ class lcl_main implementation.
         lv_msg = lo_exception->get_text( ).
         message lv_msg type 'S' display like 'E'.
     endtry.
-  endmethod.                    "constructor
+  endmethod.
 
   method authorization_check.
 
@@ -26,7 +26,7 @@ class lcl_main implementation.
       message e003(/goog/sdk_msg) with /goog/cl_googauth_v1=>c_ret_code_461.
     endif.
 
-  endmethod.                    "authorization_check
+  endmethod.
 
   method execute.
 
@@ -37,25 +37,27 @@ class lcl_main implementation.
 
     if go_demo->mo_client is bound.
 
-      if p_rb1 = abap_true. "Topic.
-        me->send_message_topic( iv_dryrun = p_dryrun
-                                iv_title  = p_title
-                                iv_body   = p_body
-                                iv_topic  = p_topic ).
-      elseif p_rb2 = abap_true. "Device Tokens
+      if p_rb1 = abap_true.
+        "Topic
+        send_message_topic( iv_dryrun = p_dryrun
+                            iv_title  = p_title
+                            iv_body   = p_body
+                            iv_topic  = p_topic ).
+      elseif p_rb2 = abap_true.
+        "Device Tokens
         loop at s_tokens[] assigning <lsr_token>.
           l_token = <lsr_token>-low.
           insert l_token into table lt_tokens.
         endloop.
-        me->send_message_multicast( iv_dryrun = p_dryrun
-                                    iv_title  = p_title
-                                    iv_body   = p_body
-                                    it_tokens = lt_tokens ).
+        send_message_multicast( iv_dryrun = p_dryrun
+                                iv_title  = p_title
+                                iv_body   = p_body
+                                it_tokens = lt_tokens ).
       endif.
 
     endif.
 
-  endmethod.                    "execute
+  endmethod.
 
 
   method send_message_topic.
@@ -109,7 +111,7 @@ class lcl_main implementation.
       cl_demo_output=>display( lv_msg ).
     endif.
 
-  endmethod.                    "send_message_topic
+  endmethod.
 
   method send_message_multicast.
 
@@ -148,11 +150,11 @@ class lcl_main implementation.
     cl_demo_output=>display( lt_output ).
 
 
-  endmethod.                    "send_message_multicast
+  endmethod.
   method close_connection.
     if mo_client is bound.
       mo_client->close( ).
     endif.
-  endmethod.                    "close_connection
+  endmethod.
 
-endclass.                    "lcl_main IMPLEMENTATION
+endclass.

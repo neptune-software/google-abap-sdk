@@ -20,9 +20,11 @@ public section.
                  tag              type string,
                  click_action     type string,
                  body_loc_key     type string,
-                 body_loc_args    type string_table, " Simplification for example
+      " Simplification for example
+                 body_loc_args    type string_table,
                  title_loc_key    type string,
-                 title_loc_args   type string_table, " Simplification for example
+       " Simplification for example
+                 title_loc_args   type string_table,
                  channel_id       type string,
                  ticker           type string,
                  sticky           type abap_bool,
@@ -32,14 +34,15 @@ public section.
                  default_sound    type abap_bool,
                  default_vibrate_timings type abap_bool,
                  default_light_settings  type abap_bool,
-                 vibrate_timings  type string_table, " Simplification for example
+      " Simplification for example
+                 vibrate_timings  type string_table,
                  visibility       type string,
                  notification_count type int4,
-                 light_settings   type string, " Simplified, should be a structured type
+      " Simplified, should be a structured type
+                 light_settings   type string,
                  image            type string,
                end of ty_android_notification .
-  types:
-    tt_android_notification type standard table of ty_android_notification with default key .
+
   types:
     begin of ty_fcm_options,
                  analytics_label type string,
@@ -47,7 +50,8 @@ public section.
   types:
     begin of ty_android_config,
                  collapse_key            type string,
-                 priority                type string, "NORMAL | "HIGH
+      "NORMAL | "HIGH
+                 priority                type string,
                  ttl                     type string,
                  restricted_package_name type string,
                  data                    type ref to data,
@@ -57,7 +61,8 @@ public section.
                end of ty_android_config .
   types:
     begin of ty_apns_payload,
-                 aps type string, " This should be a complex structure; simplified here
+       " This should be a complex structure; simplified here
+                 aps type string,
                end of ty_apns_payload .
   types:
     begin of ty_apns_config,
@@ -68,11 +73,13 @@ public section.
     begin of ty_notification,
                  title type string,
                  body  type string,
-                 image type string,  " URL to the image
+      " URL to the image
+                 image type string,
                end of ty_notification .
   types:
     begin of ty_webpush_notification,
-                 actions         type ref to data, " Simplified representation
+       " Simplified representation
+                 actions         type ref to data,
                  title           type string,
                  body            type string,
                  icon            type string,
@@ -135,8 +142,8 @@ public section.
                end of ty_messages_send_each_for_mc .
 
   constants C_SERVICE_NAME type /GOOG/SERVICE_NAME value 'fcm:v1'. "#EC NOTEXT
-  constants C_REVISION_DATE type DATUM value 20240321. "#EC NOTEXT
-  constants C_SUPPORTED_AUTH type /GOOG/SUPP_AUTH value 'IJIJ'. "#EC NOTEXT
+  constants C_REVISION_DATE type DATUM value 20240321. "#EC NEEDED
+  constants C_SUPPORTED_AUTH type /GOOG/SUPP_AUTH value 'IJIJ'. "#EC NEEDED
   constants C_ROOT_URL type STRING value 'https://fcm.googleapis.com'. "#EC NOTEXT
   constants C_PATH_PREFIX type STRING value ''. "#EC NOTEXT
 
@@ -178,7 +185,7 @@ CLASS ZCL_GOOG_FCM_V1 IMPLEMENTATION.
 
 
 method close.
-  me->close_http_client( ).
+  close_http_client( ).
   clear go_http.
 endmethod.
 
@@ -312,16 +319,14 @@ method messages_send_each.
   ls_messages_send-validate_only = is_input-validate_only.
 
   loop at is_input-messages into ls_messages_send-message.
-    me->messages_send(
-      exporting
-        is_input           = ls_messages_send
-        iv_fcm_projects_id = iv_fcm_projects_id
-      importing
-        es_output          = ls_output-output
-        es_raw             = ls_output-raw
-        ev_ret_code        = ls_output-ret_code
-        ev_err_text        = ls_output-err_text
-        es_err_resp        = ls_output-err_resp ).
+    messages_send(
+      exporting is_input           = ls_messages_send
+                iv_fcm_projects_id = iv_fcm_projects_id
+      importing es_output          = ls_output-output
+                es_raw             = ls_output-raw
+                ev_ret_code        = ls_output-ret_code
+                ev_err_text        = ls_output-err_text
+                es_err_resp        = ls_output-err_resp ).
 
     insert ls_output into table et_output.
 
@@ -341,16 +346,14 @@ method messages_send_each_for_mc.
   move-corresponding is_input-message to ls_messages_send-message.
 
   loop at is_input-message-tokens into ls_messages_send-message-token.
-    me->messages_send(
-      exporting
-        is_input           = ls_messages_send
-        iv_fcm_projects_id = iv_fcm_projects_id
-      importing
-        es_output          = ls_output-output
-        es_raw             = ls_output-raw
-        ev_ret_code        = ls_output-ret_code
-        ev_err_text        = ls_output-err_text
-        es_err_resp        = ls_output-err_resp ).
+     messages_send(
+      exporting is_input           = ls_messages_send
+                iv_fcm_projects_id = iv_fcm_projects_id
+      importing es_output          = ls_output-output
+                es_raw             = ls_output-raw
+                ev_ret_code        = ls_output-ret_code
+                ev_err_text        = ls_output-err_text
+                es_err_resp        = ls_output-err_resp ).
 
     insert ls_output into table et_output.
 
