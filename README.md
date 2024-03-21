@@ -26,3 +26,7 @@ This package comes with a class (ZCL_GOOG_FCM_V1) that implements the calling of
 In addition to that, there is also a demo program (ZGOOG_R_DEMO_FIREBASE) that allows you to easily test if the Cloud Messaging works correctly.
 
 ![DemoScreenhot](./assets/doc_images/demo_program.png)
+
+![iOS Push](./assets/doc_images/ios_push.png)
+
+![iOS Push App](./assets/doc_images/ios_push_app.png)
