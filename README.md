@@ -13,7 +13,7 @@ The Neptune DXP allows you to create Mobile Clients both for Android and iOS via
 In addition to the Neptune DXP integration, you can also use this library for general-purpose Firebase Cloud Messaging scenarios outside a Neptune DXP use case.
 
 ## Prerequisites
-Before using this library you need to install the [Cloud ABAP SDK version 1.5](https://cloud.google.com/solutions/sap/docs/abap-sdk/latest/all-guides). It comes with a very detailed install and setup guide so please follow that upfront. After you install the corresponding transport (at least the "Token" approach is required. The additional OAuth transport can be installed to but is not required)
+Before using this library you need to install the [Cloud ABAP SDK version 1.5](https://cloud.google.com/solutions/sap/docs/abap-sdk/latest/all-guides). It comes with a very detailed install and setup guide so please follow that upfront. After you install the corresponding transport (at least the "Token" approach is required. The additional OAuth transport can be installed but is not required) you need to set up the general authentication settings that are mentioned in the documentation that will then later be used for this FCM library.
 
 ## Artifacts
 This package comes with a class (ZCL_GOOG_FCM_V1) that implements the calling of the new HTTP v1 API via the following public methods.
