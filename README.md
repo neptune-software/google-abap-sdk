@@ -25,6 +25,15 @@ This package comes with a class (ZCL_GOOG_FCM_V1) that implements the calling of
 
 In addition to that, there is also a demo program (ZGOOG_R_DEMO_FIREBASE) that allows you to easily test if the Cloud Messaging works correctly.
 
+## Tests
+This library has been created and tested with the following Software Versions.
+* Neptune DXP SAP Edition v23.10.0004
+* cordova-ios@7.0.1
+* cordova-android@11.0.0
+* @havesource/cordova-plugin-push@4.0.0
+
+The actual mobile clients have been created via the Neptune Mobile Build Service.
+
 ![DemoScreenhot](./assets/doc_images/demo_program.png)
 
 ![iOS Push](./assets/doc_images/ios_push.png)
