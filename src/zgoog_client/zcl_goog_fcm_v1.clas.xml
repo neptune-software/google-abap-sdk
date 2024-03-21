@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_GOOG_FCM_V1</CLSNAME>
+    <LANGU>E</LANGU>
+    <DESCRIPT>Google Firebase Clouse Messaging V1</DESCRIPT>
+    <STATE>1</STATE>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CMPNAME>C_PATH_PREFIX</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>API Path Prefix</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_REVISION_DATE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Discovery Document revision Date</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_ROOT_URL</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>API Root URL</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_SERVICE_NAME</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Google Service Name</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_SUPPORTED_AUTH</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Supported Auth Types</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>MESSAGES_SEND</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>fcm.projects.messages.send Single</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>MESSAGES_SEND_EACH</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>fcm.projects.messages.send Many Messages</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>MESSAGES_SEND_EACH_FOR_MC</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>fcm.projects.messages.send Many Recipients, Same Message</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+   <DESCRIPTIONS_SUB>
+    <SEOSUBCOTX>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <SCONAME>IV_KEY_NAME</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Google Cloud Key Name</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <SCONAME>IV_LOG_OBJ</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Application Log: Object Name (Application Code)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <SCONAME>IV_LOG_SUBOBJ</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Application Log: Subobject</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>MESSAGES_SEND</CMPNAME>
+     <SCONAME>ES_ERR_RESP</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Error Response</DESCRIPT>
+    </SEOSUBCOTX>
+   </DESCRIPTIONS_SUB>
+  </asx:values>
+ </asx:abap>
+</abapGit>
