@@ -30,10 +30,10 @@ class lcl_main implementation.
 
   method execute.
 
-    data: l_token   type string,
+    data: lv_token  type string,
           lt_tokens type string_table.
 
-    field-symbols <lsr_token> like line of s_tokens[].
+    field-symbols <ls_r_token> like line of s_tokens[].
 
     if go_demo->mo_client is bound.
 
@@ -45,9 +45,9 @@ class lcl_main implementation.
                             iv_topic  = p_topic ).
       elseif p_rb2 = abap_true.
         "Device Tokens
-        loop at s_tokens[] assigning <lsr_token>.
-          l_token = <lsr_token>-low.
-          insert l_token into table lt_tokens.
+        loop at s_tokens[] assigning <ls_r_token>.
+          lv_token = <ls_r_token>-low.
+          insert lv_token into table lt_tokens.
         endloop.
         send_message_multicast( iv_dryrun = p_dryrun
                                 iv_title  = p_title
@@ -71,10 +71,7 @@ class lcl_main implementation.
       lv_err_text        type string,
       ls_err_resp        type /goog/err_resp,
       ls_output          type zcl_goog_fcm_v1=>ty_single_message,
-      lt_topics          type table of string,
       lo_exception       type ref to /goog/cx_sdk.
-
-    field-symbols: <ls_topic> type /goog/cl_pubsub_v1=>ty_041.
 
     lv_fcm_projects_id = mo_client->gv_project_id.
 
@@ -102,7 +99,7 @@ class lcl_main implementation.
 
     if mo_client->is_success( lv_ret_code ) = abap_true.
       if ls_output is not initial.
-        cl_demo_output=>display(  ls_output ).
+        cl_demo_output=>display( ls_output ).
       else.
         cl_demo_output=>display( 'Unable to retrieve Result'  ).
       endif.
@@ -120,11 +117,8 @@ class lcl_main implementation.
       ls_input           type zcl_goog_fcm_v1=>ty_messages_send_each_for_mc,
       lv_fcm_projects_id type string,
       lt_output          type zcl_goog_fcm_v1=>ty_t_send_each_res,
-      lt_topics          type table of string,
       lv_msg             type string,
       lo_exception       type ref to /goog/cx_sdk.
-
-    field-symbols: <ls_topic> type /goog/cl_pubsub_v1=>ty_041.
 
     lv_fcm_projects_id = mo_client->gv_project_id.
 

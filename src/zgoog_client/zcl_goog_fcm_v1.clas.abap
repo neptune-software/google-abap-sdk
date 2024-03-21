@@ -261,7 +261,7 @@ method messages_send.
     lv_uri = lv_uri && '?'.
     loop at gt_common_qparams into ls_common_qparam.
       if ls_common_qparam-name is not initial and
-         ls_common_qparam-value is not initial.
+           ls_common_qparam-value is not initial.
         lv_uri = lv_uri && ls_common_qparam-name && '=' && ls_common_qparam-value.
         lv_uri = lv_uri && '&'.
       endif.
@@ -348,13 +348,13 @@ method messages_send_each_for_mc.
   move-corresponding is_input-message to ls_messages_send-message.
 
   loop at is_input-message-tokens into ls_messages_send-message-token.
-     messages_send(  exporting is_input           = ls_messages_send
-                               iv_fcm_projects_id = iv_fcm_projects_id
-                     importing es_output          = ls_output-output
-                               es_raw             = ls_output-raw
-                               ev_ret_code        = ls_output-ret_code
-                               ev_err_text        = ls_output-err_text
-                               es_err_resp        = ls_output-err_resp ).
+     messages_send( exporting is_input           = ls_messages_send
+                              iv_fcm_projects_id = iv_fcm_projects_id
+                    importing es_output          = ls_output-output
+                              es_raw             = ls_output-raw
+                              ev_ret_code        = ls_output-ret_code
+                              ev_err_text        = ls_output-err_text
+                              es_err_resp        = ls_output-err_resp ).
 
     insert ls_output into table et_output.
 

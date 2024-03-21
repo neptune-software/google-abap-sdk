@@ -22,6 +22,6 @@ class lcl_main definition.
     methods send_message_multicast importing iv_dryrun type abap_bool
                                              iv_title  type string
                                              iv_body   type string
-                                             it_tokens type string_table .
+                                             it_tokens type string_table.
 
 endclass.                    "lcl_main DEFINITION
