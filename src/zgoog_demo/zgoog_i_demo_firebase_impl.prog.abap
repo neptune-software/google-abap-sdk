@@ -101,7 +101,7 @@ class lcl_main implementation.
       if ls_output is not initial.
         cl_demo_output=>display( ls_output ).
       else.
-        cl_demo_output=>display( 'Unable to retrieve Result'  ).
+        cl_demo_output=>display( 'Unable to retrieve Result' ).
       endif.
     else.
       lv_msg = lv_ret_code && ':' && lv_err_text.
