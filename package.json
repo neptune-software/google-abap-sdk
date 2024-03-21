@@ -1,0 +1,23 @@
+{
+  "name": "@neptune-software/google-abap-sdk",
+  "version": "1.0.0",
+  "description": "Enhanced Google Cloud SDK",
+  "scripts": {
+    "lint:file": "abaplint > list.txt",
+    "test": "npm run lint",
+    "lint": "abaplint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neptune-software/google-abap-sdk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neptune-software/google-abap-sdk/issues"
+  },
+  "homepage": "https://github.com/neptune-software/google-abap-sdk#readme",
+  "devDependencies": {
+    "@abaplint/cli": "^2.106.2"
+  }
+}
