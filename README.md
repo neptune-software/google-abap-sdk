@@ -39,3 +39,39 @@ The actual mobile clients have been created via the Neptune Mobile Build Service
 ![iOS Push](./assets/doc_images/ios_push.png)
 
 ![iOS Push App](./assets/doc_images/ios_push_app.png)
+
+## Setup for Firebase Cloud Messaging
+The general setup for the Google Cloud ABAP SDK needs to be followed to be able to use this repository.
+There are many different options to perform the authentication against the Google Cloud Platform. In our test cases, we were using the approach via:
+[Authenticate using JSON Web Tokens (JWT)](https://cloud.google.com/solutions/sap/docs/abap-sdk/latest/authentication#externally_hosted_use_token).
+When setting up Firebase cloud messaging in the Firebase console you will already get a service account generated for you. You can navigate to the service account from the Firebase console in the settings overview:
+![Firebase Console Service Accounts](./assets/doc_images/firebase-console-service-accounts.png)
+The auto-generated service account will have a private key that is of type JSON as this is the recommended key type by Google. For our setup, we however required a p12 file to be able to put that into STRUST. That's why we needed to generate an additional Key for the generated Service account in the Google Cloud console (which you can navigate to from the Firebase service account settings).
+![Google Cloud Console Service Account](./assets/doc_images/google-cloud-console-service-account.png)
+
+![Google Cloud Console Service Account Key Overview](./assets/doc_images/google-cloud-console-service-account-key-overview.png)
+
+![Google Cloud Console Service Account Key Create P12](./assets/doc_images//google-cloud-console-service-account-key-create-p12.png)
+
+The rest of the setup mentioned in the general Authentication step for the Google Cloud ABAP SDK can then be followed with that P12 file:
+
+https://cloud.google.com/solutions/sap/docs/abap-sdk/latest/authentication#jwt-create-p12-key
+
+https://cloud.google.com/solutions/sap/docs/abap-sdk/latest/authentication#jwt-import-service-account-key-strust
+
+
+## Sample Configuration 
+Below you find the setup that we used for setting up Firebase cloud messaging from an SAP configuration perspective. The Client Key Identifier can freely be chosen (in our case we used **FIREBASE**). When instantiating the class `zcl_goog_fcm_v1` you need to provide the name of the client key so the framework can pick up all required settings for the communication against the Google Cloud services.
+
+### STRUST PSE File
+We downloaded the p12 file from the service account. Our SAP Basis administrator converted the p12 file with the `sapgenpse` command line tool to a pse file that we then were able to import into STRUST in the newly created note (part of the setup).
+![STRUST PSE Setup](./assets/doc_images/strust-pse-setup.png)
+
+### Configure Client Key
+![SPRO Client Key Setup](./assets/doc_images/spro-google-client-key-setup.png)
+
+### Configure Service Mapping
+![SPRO Service Mapping Setup](./assets/doc_images/spro-google-service-mapping.png)
+
+### Configure Parameters
+![SPRO Parameter Setup](./assets/doc_images/spro-google-parameters.png)
