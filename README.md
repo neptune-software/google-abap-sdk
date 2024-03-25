@@ -75,3 +75,11 @@ We downloaded the p12 file from the service account. Our SAP Basis administrator
 
 ### Configure Parameters
 ![SPRO Parameter Setup](./assets/doc_images/spro-google-parameters.png)
+
+
+## Additional Notes
+This library is developed in the Z-Namespace without any dependencies against Neptune DXP SAP Edition development artifacts.
+So you can also use it in a Neptune DXP Open Edition or a completely different scenario. Therefore you will need to select the device IDs that you want to send the push notification to in your custom ABAP Code by selecting them from table /NEPTUNE/DEVICES. A Device ID will be registered automatically in the Neptune DXP Mobile Client framework after successful authentication against the SAP System per SAP User.
+![Neptune Device ID Selection](./assets/doc_images/device-id-selection.png)
+
+Another important note is that the new HTTP V1 API **does not support multicast messages** (sending a push Notification to multiple device IDs with one call) (https://firebase.google.com/support/faq#fcm-depr-multiple-tokens). So there will be one HTTP call per push notification that should be sent to a device ID. However, this Framework offers different methods that also allow you to pass an internal table with device IDs and then perform multiple HTTP calls per device ID automatically for you.
