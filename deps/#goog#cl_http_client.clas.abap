@@ -41,7 +41,7 @@ data GV_PROJECT_ID type string .
   methods CLOSE_HTTP_CLIENT .
   methods CONSTRUCTOR
     importing
-      !IS_KEY type /GOOG/CLIENT_KEY optional
+      !IV_KEY type CLIKE optional
       !IV_ENDPOINT type STRING optional
       !IV_ENDPOINT_SUFFIX type STRING optional
       !IV_SERVICE_NAME type /GOOG/SERVICE_NAME optional

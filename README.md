@@ -5,7 +5,16 @@ This is an additional integration scenario for the amazing Google ABAP SDK Libra
 The main purpose of this library is to allow sending Firebase Push Notifications (aka Firebase Cloud Messaging) via the new HTTP v1 API (https://fcm.googleapis.com/v1/projects/*myproject-b5ae1*/messages:send) as the legacy FCM API (https://fcm.googleapis.com/fcm/send) was deprecated on June 20, 2023, and will be removed in June 2024. You find more information about the deprecation and migration steps [here](https://firebase.google.com/docs/cloud-messaging/migrate-v1).
 The biggest challenge for the new API is that the authentication takes place through short-lived OAuth access tokens that need to be obtained before sending the actual request. The main ABAP Cloud Library already has all implementation for the correct handling of tokens in place that's why we choose to have the main Google Cloud ABAP SDK as a foundation for this additional functionality.
 
-So please make sure you **FIRST INSTALL AND SETUP THE GOOGLE CLOUD ABAP SDK IN VERSION 1.5** (see [Prerequisites](#Prerequisites)) before using this package because you would get syntax errors otherwise. 
+So please make sure you **FIRST INSTALL AND SETUP THE GOOGLE CLOUD ABAP SDK** (see [Prerequisites](#Prerequisites)) before using this package because you would get syntax errors otherwise. 
+
+## Version Dependency
+Depending on the **GOOGLE CLOUD ABAP SDK Version** you need to install different versions of this repository.
+
+If you are using **GOOGLE CLOUD ABAP SDK 1.5** please install Version 1.0 of this Repository (https://github.com/neptune-software/google-abap-sdk/releases/tag/v1.0.0).
+
+If you are using **GOOGLE CLOUD ABAP SDK 1.7** please install Version 2.0 of this Repository (https://github.com/neptune-software/google-abap-sdk/releases/tag/v2.0.0).
+
+If you don't ensure to download the correct version you will get a syntax error that is also easily fixable on your own if you want (see https://github.com/neptune-software/google-abap-sdk/commit/9e1cf05d7b9cc622386a546295f574f5eb93eb25)
 
 ## Background
 The Neptune DXP allows you to create Mobile Clients both for Android and iOS via the Cordova framework. Our solution offers an easy way to integrate Firebase Cloud Messaging (Push Notifications via Firebase) into your Mobile Clients by configuring a few parameters in our Cockpit. Our Neptune DXP SAP Edition is an ABAP Addon that comes with the Function Module called /NEPTUNE/PUSH_FIREBASE. It allows you to send push notifications to the corresponding Mobile Clients. However, since this function module is using the legacy FCM API, this new repository leveraging the well-established Google Cloud ABAP SDK is the easy-to-use successor of the /NEPTUNE/PUSH_FIREBASE function module.
@@ -13,7 +22,7 @@ The Neptune DXP allows you to create Mobile Clients both for Android and iOS via
 In addition to the Neptune DXP integration, you can also use this library for general-purpose Firebase Cloud Messaging scenarios outside a Neptune DXP use case.
 
 ## Prerequisites
-Before using this library you need to install the [Cloud ABAP SDK version 1.5](https://cloud.google.com/solutions/sap/docs/abap-sdk/latest/all-guides). It comes with a very detailed install and setup guide so please follow that upfront. After you install the corresponding transport (at least the "Token" approach is required. The additional OAuth transport can be installed but is not required) you need to set up the general authentication settings that are mentioned in the documentation that will then later be used for this FCM library.
+Before using this library you need to install the correct [Cloud ABAP SDK version](https://cloud.google.com/solutions/sap/docs/abap-sdk/latest/all-guides). It comes with a very detailed install and setup guide so please follow that upfront. After you install the corresponding transport (at least the "Token" approach is required. The additional OAuth transport can be installed but is not required) you need to set up the general authentication settings that are mentioned in the documentation that will then later be used for this FCM library.
 
 ## Artifacts
 This package comes with a class (ZCL_GOOG_FCM_V1) that implements the calling of the new HTTP v1 API via the following public methods.
