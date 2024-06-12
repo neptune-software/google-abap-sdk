@@ -9,7 +9,6 @@ class ZCL_GOOG_FCM_V1 definition
   create public .
 
 public section.
-  type-pools ABAP .
 
   types:
     begin of ty_android_notification,
@@ -142,8 +141,8 @@ public section.
                end of ty_messages_send_each_for_mc .
 
   constants C_SERVICE_NAME type /GOOG/SERVICE_NAME value 'fcm:v1'. "#EC NOTEXT
-  constants C_REVISION_DATE type DATUM value 20240321. "#EC NOTEXT     "#EC NEEDED
-  constants C_SUPPORTED_AUTH type /GOOG/SUPP_AUTH value 'IJIJ'. "#EC NOTEXT     "#EC NEEDED
+  constants C_REVISION_DATE type DATUM value 20240321. "#EC NOTEXT      "#EC NEEDED
+  constants C_SUPPORTED_AUTH type /GOOG/SUPP_AUTH value 'IJIJ'. "#EC NOTEXT      "#EC NEEDED
   constants C_ROOT_URL type STRING value 'https://fcm.googleapis.com'. "#EC NOTEXT
   constants C_PATH_PREFIX type STRING value ''. "#EC NOTEXT
 
