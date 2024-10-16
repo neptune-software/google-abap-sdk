@@ -12,7 +12,7 @@ Depending on the **GOOGLE CLOUD ABAP SDK Version** you need to install different
 
 If you are using **GOOGLE CLOUD ABAP SDK 1.5** please install Version 1.0 of this Repository (https://github.com/neptune-software/google-abap-sdk/releases/tag/v1.0.0).
 
-If you are using **GOOGLE CLOUD ABAP SDK 1.7** please install Version 2.0 of this Repository (https://github.com/neptune-software/google-abap-sdk/releases/tag/v2.0.0).
+If you are using **GOOGLE CLOUD ABAP SDK 1.7** or **GOOGLE CLOUD ABAP SDK 1.8** please install Version 2.0 of this Repository (https://github.com/neptune-software/google-abap-sdk/releases/tag/v2.0.0).
 
 If you don't ensure to download the correct version you will get a syntax error that is also easily fixable on your own if you want (see https://github.com/neptune-software/google-abap-sdk/commit/9e1cf05d7b9cc622386a546295f574f5eb93eb25)
 
