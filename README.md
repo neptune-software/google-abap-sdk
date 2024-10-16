@@ -92,3 +92,35 @@ So you can also use it in a Neptune DXP Open Edition or a completely different s
 ![Neptune Device ID Selection](./assets/doc_images/device-id-selection.png)
 
 Another important note is that the new HTTP V1 API **does not support multicast messages** (sending a push Notification to multiple device IDs with one call) (https://firebase.google.com/support/faq#fcm-depr-multiple-tokens). So there will be one HTTP call per push notification that should be sent to a device ID. However, this Framework offers different methods that also allow you to pass an internal table with device IDs and then perform multiple HTTP calls per device ID automatically for you.
+
+## Gotchas
+
+### Error Response
+When testing the Push notification with the program `ZGOOG_R_DEMO_FIREBASE` and providing a device token you might get an error response *Data Type not yet supported*. 
+![Data Type not yet supported](./assets/doc_images/datatype-not-yet-supported.png)
+When debugging the code in `/GOOG/CL_HTTP_CLIENT->HANDLE_HTTP_RESPONSE` you would get a error JSON response in the response stating that *"The registration token is not a valid FCM registration token"*:
+![fcm error response](./assets/doc_images/error-response.png)
+![](../google-abap-sdk../2024-10-16-13-54-51.png)
+```json
+{
+  "error": {
+    "code": 400,
+    "message": "The registration token is not a valid FCM registration token",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.firebase.fcm.v1.FcmError",
+        "errorCode": "INVALID_ARGUMENT"
+      }
+    ]
+  }
+}
+```
+This response would be send back when the provided device token is invalid.
+You need to be sure that you provide the actual device token. 
+
+> [!WARNING]
+> Probably you will copy the value of a token out of table `/NEPTUNE/DEVICES`. SAPs ALV Grid has a limit of characters that can be shown in a column that is **LESS THAN THE LENGTH OF THE DEVICE TOKEN**.
+> So if you copy the device token from the column in the ALV Grid directly you will not get the full device token but a truncated version of it. Instead you should make sure you use `SE16` (not `SE16N`) and open the detail view of a device registration to get the full device token into your clipboard:
+> ![se16 devices](./assets/doc_images/se16-devices.png) 
+> ![ser16 details](./assets/doc_images/se16-details.png)
