@@ -1,5 +1,16 @@
 # @neptune-software/google-abap-sdk
 
+> [!IMPORTANT]
+> With the release of the **Google Cloud ABAP SDK 1.9** the toolset of this repository is not required anymore to send firebase push notifications via FirebaseCloudMessaging (FCM). FCM can be used directly with the service class **/GOOG/CL_FCM_V1_EXT** provided by google with version **1.9** of the ABAP SDK.
+> Most important functionality of this repository can also be used by corresponding methods of the google service class.
+> It has been tested and verified to be working with Neptune Mobile clients.
+> | Method in ZCL_GOOG_FCM_V1    | Method in /GOOG/CL_FCM_V1_EXT                                              |
+> | ---------------------------- | -------------------------------------------------------------------------- |
+> | MESSAGES_SEND                |  SEND_MESSAGES                                                             | 
+> | MESSAGES_SEND_EACH_FOR_MC    | SEND_MULTICAST_MESSAGE                                                     |
+> 
+> This repository will still be kept alive for documentation purposes.
+
 ## Introduction
 This is an additional integration scenario for the amazing Google ABAP SDK Library.
 The main purpose of this library is to allow sending Firebase Push Notifications (aka Firebase Cloud Messaging) via the new HTTP v1 API (https://fcm.googleapis.com/v1/projects/*myproject-b5ae1*/messages:send) as the legacy FCM API (https://fcm.googleapis.com/fcm/send) was deprecated on June 20, 2023, and will be removed in June 2024. You find more information about the deprecation and migration steps [here](https://firebase.google.com/docs/cloud-messaging/migrate-v1).
